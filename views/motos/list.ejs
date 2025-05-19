@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Listado de Motos - Tienda de Motos</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <%- include('../partials/header') %>
+
+  <div class="container">
+    <h1>Listado de Motos</h1>
+    <a href="/motos/create" class="button button-primary">Añadir Nueva Moto</a>
+    
+    <div class="moto-cards">
+      <% motos.forEach(moto => { %>
+        <div class="moto-card">
+          <img src="/images/<%= moto.imagen %>" alt="<%= moto.nombre %>" class="moto-image">
+          <div class="moto-info">
+            <h2 class="moto-name"><%= moto.nombre %></h2>
+            <p class="moto-description"><%= moto.descripcion %></p>
+            <p class="moto-price">$<%= moto.precio %></p>
+            <p class="moto-category"><strong>Categoría:</strong> <%= moto.Categoria ? moto.Categoria.nombre : 'Sin Categoría' %></p>
+            <div class="moto-actions">
+              <a href="/motos/<%= moto.id %>/edit" class="button">Editar</a>
+              <form action="/motos/<%= moto.id %>?_method=DELETE" method="POST" style="display:inline;">
+                <button type="submit" class="button button-danger">Eliminar</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      <% }) %>
+    </div>
+    <a href="/" class="button button-secondary">Volver a Inicio</a>
+  </div>
+
+  <%- include('../partials/footer') %>
+</body>
+</html>
